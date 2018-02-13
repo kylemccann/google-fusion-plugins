@@ -1,8 +1,7 @@
 plugins {
   id 'java'
-//  id 'com.github.johnrengelman.shadow' version '1.2.2'
-//  id "com.moowork.node" version "0.11"
 }
+
 
 repositories {
   mavenLocal()
@@ -98,7 +97,7 @@ dependencies {
           dir: "$fusionHome/apps/libs/",
           includes: ["*.jar"]
   )
-  compile 'com.ibm.watson.developer_cloud:java-sdk:3.4.0'
+  compile 'com.google.cloud:google-cloud-speech:0.32.0-alpha',
   testCompile("com.github.tomakehurst:wiremock:1.57") {
     exclude module: 'guava'
     exclude module: 'jackson-core'
@@ -153,10 +152,10 @@ task deployDependencies() {
 
 task deployLibs(dependsOn: [deployLibsToSpark, deployLibsToApi, deployDependencies]) {
   //this is a hack, but acceptable for now
-  def watsonJar = "\napps/libs/watson-fusion-plugins-${version}.jar"
+  def googleJar = "\napps/libs/google-fusion-plugins-${version}.jar"
 
   if (file("$fusionHome/apps/jetty/api/webapps/api-extra-classpath.txt").exists()) {
-    file("$fusionHome/apps/jetty/api/webapps/api-extra-classpath.txt").append(watsonJar)
+    file("$fusionHome/apps/jetty/api/webapps/api-extra-classpath.txt").append(googleJar)
 
     println("Copied libs to apis")
     configurations.compile.resolvedConfiguration.resolvedArtifacts.each {
@@ -164,7 +163,7 @@ task deployLibs(dependsOn: [deployLibsToSpark, deployLibsToApi, deployDependenci
     }
   }
   if (file("$fusionHome/apps/jetty/connectors/webapps/connectors-extra-classpath.txt").exists()) {
-    file("$fusionHome/apps/jetty/connectors/webapps/connectors-extra-classpath.txt").append(watsonJar)
+    file("$fusionHome/apps/jetty/connectors/webapps/connectors-extra-classpath.txt").append(googleJar)
     configurations.compile.resolvedConfiguration.resolvedArtifacts.each {
       f -> file("$fusionHome/apps/jetty/connectors/webapps/connectors-extra-classpath.txt").append("\napps/libs/" + f.name + "-" + f.moduleVersion.getId().getVersion() + ".jar")
     }
@@ -191,10 +190,10 @@ task compile(dependsOn: [deployLibs]) {
 compileJava.doFirst {
   println("Removing old instances of the plugin jar from Fusion")
   delete fileTree(dir: "$fusionHome/apps/libs",
-          include: "watson-fusion-plugins*.jar"
+          include: "google-fusion-plugins*.jar"
   )
   delete fileTree(dir: "$fusionHome/apps/spark/lib/",
-          include: "watson-fusion-plugins*.jar"
+          include: "google-fusion-plugins*.jar"
   )
 }
 
