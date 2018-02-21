@@ -1,6 +1,4 @@
-package com.lucidworks.apollo.pipeline.query.stages;
-
-import com.google.protobuf.ByteString;
+package com.lucidworks.apollo.pipeline.query.stages.JsonObjects;
 
 //This is used to create a JSON request object to send to the API.
 public class RequestObject {
@@ -8,7 +6,7 @@ public class RequestObject {
     RecognitionObject config;
     RecognitionAudio audio;
 
-    public RequestObject (RecognitionObject config, ByteString audioString){
+    public RequestObject (RecognitionObject config, String audioString){
         this.config = config;
 
         audio = new RecognitionAudio(audioString);
@@ -24,5 +22,21 @@ public class RequestObject {
          object(SpeechContext)
          },
          }*/
+    }
+
+    public RecognitionObject getConfig() {
+        return config;
+    }
+
+    public void setConfig(RecognitionObject config) {
+        this.config = config;
+    }
+
+    public RecognitionAudio getAudio() {
+        return audio;
+    }
+
+    public void setAudio(RecognitionAudio audio) {
+        this.audio = audio;
     }
 }

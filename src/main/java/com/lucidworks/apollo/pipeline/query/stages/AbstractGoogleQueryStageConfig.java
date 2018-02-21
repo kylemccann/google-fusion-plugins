@@ -14,23 +14,21 @@ public abstract class AbstractGoogleQueryStageConfig extends AbstractGoogleStage
             name = RESULTS_LOCATION,
             hints = {UIHints.ADVANCED},
             defaultValue = REQUEST)
-    @Annotations.StringProperty(allowedValues = {REQUEST, RESPONSE, CONTEXT}) //TODO: should this be an enumerated type?
+    @Annotations.StringProperty(allowedValues = {REQUEST, RESPONSE, CONTEXT})
     protected final String resultsLocation;
 
-    @Annotations.SchemaProperty(title = "Sample Rate", description = "Set this only if you wish to constrain all your audio input to one single sample rate. ")
-    protected final String sampleRateHertz;
+
+
 
     public AbstractGoogleQueryStageConfig(String id,
-                                          @JsonProperty("googleEnvironmentVar") String googleEnvironmentVar,
+                                          @JsonProperty("apiKey") String apiKey,
                                           @JsonProperty("resultsLocation") String resultsLocation,
                                           @JsonProperty("resultsKey") String resultsKey,
-                                          @JsonProperty("googleEndpoint") String googleEndpoint,
-                                          @JsonProperty("sampleRateHertz") String sampleRateHertz)
+                                          @JsonProperty("googleEndpoint") String googleEndpoint
+                                          )
     {
-        super(id, googleEnvironmentVar, googleEndpoint, resultsKey);
-        this.resultsLocation = resultsLocation;
-        this.sampleRateHertz = sampleRateHertz;
-
+        super(id, apiKey, googleEndpoint, resultsKey);
+       this.resultsLocation = resultsLocation;
     }
 
     @JsonProperty("resultsLocation")
@@ -38,9 +36,6 @@ public abstract class AbstractGoogleQueryStageConfig extends AbstractGoogleStage
         return resultsLocation;
     }
 
-    @JsonProperty("sampleRateHertz")
-    public String getSampleRateHertz() {
-        return sampleRateHertz;
-    }
+
 
 }

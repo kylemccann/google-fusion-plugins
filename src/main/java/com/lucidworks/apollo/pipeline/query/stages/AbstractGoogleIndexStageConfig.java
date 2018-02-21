@@ -26,12 +26,12 @@ public abstract class AbstractGoogleIndexStageConfig extends AbstractGoogleStage
   protected final String resultsLocation;
 
 
-  public AbstractGoogleIndexStageConfig(String id, @JsonProperty("googleEnvironmentVar") String googleEnvironmentVar,
+  public AbstractGoogleIndexStageConfig(String id, @JsonProperty("apiKey") String apiKey,
                                         @JsonProperty("resultsLocation") String resultsLocation,
                                         @JsonProperty("resultsKey") String resultsKey,
                                         @JsonProperty("googleEndpoint") String googleEndpoint)
   {
-    super(id, googleEnvironmentVar, googleEndpoint, resultsKey);
+    super(id, apiKey, googleEndpoint, resultsKey);
     this.resultsLocation = resultsLocation;
   }
 
