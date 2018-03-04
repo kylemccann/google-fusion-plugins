@@ -47,7 +47,6 @@ import org.codehaus.jackson.annotate.JsonTypeName;
                                        @JsonProperty("apiKey") String apiKey,
                                        @JsonProperty("resultsLocation") String resultsLocation,
                                        @JsonProperty("resultsKey") String resultsKey,
-                                       @JsonProperty("extractString") Boolean extractString,
                                        @JsonProperty("googleEndpoint") String googleEndpoint,
                                        @JsonProperty("sampleRate") String sampleRate,
                                        @JsonProperty("encoding") String encoding,
