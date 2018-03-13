@@ -37,14 +37,14 @@ import java.nio.file.Paths;
 import java.util.logging.FileHandler;
 
 @AutoDiscover(type = SpeechToTextStageConfig.TYPE)
-public class SpeechToTextStage extends QueryStage<SpeechToTextStageConfig> {
+public class GoogleSpeechToTextStage extends QueryStage<SpeechToTextStageConfig> {
     private static Logger log = LoggerFactory.getLogger("");
     protected FileHandler handler;
     protected PrintWriter logit;
 
 
     @Inject
-    public SpeechToTextStage(@Assisted StageAssistFactoryParams params) {
+    public GoogleSpeechToTextStage(@Assisted StageAssistFactoryParams params) {
         super(params);
     }
 
