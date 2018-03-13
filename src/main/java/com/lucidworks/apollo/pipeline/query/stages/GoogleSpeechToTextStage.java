@@ -36,8 +36,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.FileHandler;
 
-@AutoDiscover(type = SpeechToTextStageConfig.TYPE)
-public class GoogleSpeechToTextStage extends QueryStage<SpeechToTextStageConfig> {
+@AutoDiscover(type = GoogleSpeechToTextStageConfig.TYPE)
+public class GoogleSpeechToTextStage extends QueryStage<GoogleSpeechToTextStageConfig> {
     private static Logger log = LoggerFactory.getLogger("");
     protected FileHandler handler;
     protected PrintWriter logit;
@@ -66,7 +66,7 @@ public class GoogleSpeechToTextStage extends QueryStage<SpeechToTextStageConfig>
 
 
                 //Get Configuration from Fusion
-                SpeechToTextStageConfig stageConfig = getConfiguration();
+                GoogleSpeechToTextStageConfig stageConfig = getConfiguration();
                 debugMode = stageConfig.isDebugMode();
 
 
@@ -168,12 +168,12 @@ public class GoogleSpeechToTextStage extends QueryStage<SpeechToTextStageConfig>
 
     protected void writeToResultsLocation(QueryRequestAndResponse message, Context context, String result, String resultsLocation, String resultsKey) {
         switch (resultsLocation) {
-            case SpeechToTextStageConfig.REQUEST: //Return results string
+            case GoogleSpeechToTextStageConfig.REQUEST: //Return results string
                 message.request.putSingleParam(resultsKey, result);
                 break;
 
 
-            case SpeechToTextStageConfig.RESPONSE:
+            case GoogleSpeechToTextStageConfig.RESPONSE:
                 // Add a transformer to run after the stages run
                 final Function<QueryRequestAndResponse, QueryRequestAndResponse> transformer
                         = context.getProperty(Context.RESPONSE_TRANSFORMER, Function.class);
@@ -199,7 +199,7 @@ public class GoogleSpeechToTextStage extends QueryStage<SpeechToTextStageConfig>
                 });
 
                 break;
-            case SpeechToTextStageConfig.CONTEXT:
+            case GoogleSpeechToTextStageConfig.CONTEXT:
                 context.setProperty(resultsKey, result);
                 break;
         }
