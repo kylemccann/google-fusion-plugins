@@ -111,19 +111,16 @@ dependencies {
   compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.5'
 
   configurations.all {
-    resolutionStrategy {
-
-      force 'com.fasterxml.jackson.core:jackson-databind:2.6.5'
-      force 'com.fasterxml.jackson.core:jackson-annotations:2.9.4'
-      force 'com.fasterxml.jackson.core:jackson-core:2.9.4'
-      force 'org.apache.httpcomponents:httpclient:4.3.6'
-    }
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.6.5'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.4'
+    compile group: 'com.fasterxml.jackson.core', name:'jackson-core', version:'2.9.4'
+    compile group: 'org.apache.httpcomponents', name:'httpclient', version:'4.3.6'
   }
 
 
   testCompile("com.github.tomakehurst:wiremock:1.57") {
     exclude module: 'guava'
-    exclude module: 'jackson-core'
+//    exclude module: 'jackson-core'
     exclude module: 'jackson-annotations'
     exclude module: 'jackson-databind'
     exclude module: 'httpclient'

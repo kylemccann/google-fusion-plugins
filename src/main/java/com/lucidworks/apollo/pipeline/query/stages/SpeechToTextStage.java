@@ -1,7 +1,7 @@
 package com.lucidworks.apollo.pipeline.query.stages;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Function;
 import com.google.inject.Inject;
@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.File;
@@ -62,6 +63,7 @@ public class SpeechToTextStage extends QueryStage<SpeechToTextStageConfig> {
 
                 //Write Audio to file.
                 File file = writeToFile(entityBytes);
+
 
                 //Get Configuration from Fusion
                 SpeechToTextStageConfig stageConfig = getConfiguration();
@@ -144,6 +146,7 @@ public class SpeechToTextStage extends QueryStage<SpeechToTextStageConfig> {
                 if(logit!=null) {
                     logit.println("Google Speech API Error: " + errorMessage);
                 }
+
                 throw new Exception("Google Speech API: " + errorMessage);
 
             }else {
@@ -211,7 +214,7 @@ public class SpeechToTextStage extends QueryStage<SpeechToTextStageConfig> {
     }
 
 
-    protected String createJsonObject(String encoding, int sampleRate, byte[] data) throws JsonProcessingException {
+    protected String createJsonObject(String encoding, int sampleRate, byte[] data) throws Exception {
         //**Create Objects to be serialised into JSON **//
         RecognitionObject recog = new RecognitionObject(encoding, sampleRate);
 
@@ -229,7 +232,7 @@ public class SpeechToTextStage extends QueryStage<SpeechToTextStageConfig> {
     @NotNull
     protected File writeToFile(byte[] entityBytes) throws IOException {
         File audio = File.createTempFile("speechToText", ".wav");
-
+        logit.println("File path: " + audio.getAbsolutePath() );
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(audio);
