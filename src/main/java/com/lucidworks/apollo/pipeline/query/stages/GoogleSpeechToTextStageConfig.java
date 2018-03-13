@@ -9,13 +9,13 @@ import org.codehaus.jackson.annotate.JsonTypeName;
     /**
      * See https://github.com/google-developer-cloud/java-sdk
      **/
-    @JsonTypeName(SpeechToTextStageConfig.TYPE)
+    @JsonTypeName(GoogleSpeechToTextStageConfig.TYPE)
     @Annotations.Schema(
-            type = SpeechToTextStageConfig.TYPE,
+            type = GoogleSpeechToTextStageConfig.TYPE,
             title = "Google Speech to Text",
             description = "This stage forwards Audio content to the Google Speech To Text Service and either converts to text and adds to a parameter on the request or puts the results into the pipeline context for downstream handling."
     )
-    public class SpeechToTextStageConfig extends AbstractGoogleQueryStageConfig {
+    public class GoogleSpeechToTextStageConfig extends AbstractGoogleQueryStageConfig {
 
         public static final String TYPE = "google-speech-to-text";
 
@@ -43,14 +43,14 @@ import org.codehaus.jackson.annotate.JsonTypeName;
         protected  String sampleRate;
 
         @JsonCreator
-        public SpeechToTextStageConfig(@JsonProperty("id") String id,
-                                       @JsonProperty("apiKey") String apiKey,
-                                       @JsonProperty("resultsLocation") String resultsLocation,
-                                       @JsonProperty("resultsKey") String resultsKey,
-                                       @JsonProperty("googleEndpoint") String googleEndpoint,
-                                       @JsonProperty("sampleRate") String sampleRate,
-                                       @JsonProperty("encoding") String encoding,
-                                       @JsonProperty("debugMode") Boolean debugMode)
+        public GoogleSpeechToTextStageConfig(@JsonProperty("id") String id,
+                                             @JsonProperty("apiKey") String apiKey,
+                                             @JsonProperty("resultsLocation") String resultsLocation,
+                                             @JsonProperty("resultsKey") String resultsKey,
+                                             @JsonProperty("googleEndpoint") String googleEndpoint,
+                                             @JsonProperty("sampleRate") String sampleRate,
+                                             @JsonProperty("encoding") String encoding,
+                                             @JsonProperty("debugMode") Boolean debugMode)
         {
             super(id, apiKey, resultsLocation, resultsKey, googleEndpoint);
 
