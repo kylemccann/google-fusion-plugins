@@ -110,11 +110,6 @@ Here's an example configuration, with user and password XXXXXX'd out.  Note that
     }
 
 
-## Natural Language Query Classifier
-
-The NL Query Classifier is useful for attaching labels to a query, such as the intent of the query.  It requires you to build and train a model using Watson's services.  You must also know the 
-name of that model in order to plug it into the stage configuration in Fusion.
-
 ### Example API usage.
 
 Assuming you have a collection named "watson" setup and the NL Query Classifier stage configured in the default pipeline, you can do the following:
