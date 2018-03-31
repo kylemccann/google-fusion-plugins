@@ -1,10 +1,10 @@
-# IBM Watson Stages for Lucidworks Fusion
-Lucidworks Fusion stages for IBM Watson (BlueMix) Services.
+# Google Speech to Text Stage for Lucidworks Fusion
+Lucidworks Fusion stages for Google Speech to Text API.
 
 
 # Prerequisites
 
-1. You will need an IBM BlueMix account.  Depending on what stages you use, you will need to start one or more BlueMix services.  https://www.ibm.com/cloud-computing/bluemix/
+1. You will need an Google Developer account.   https://developers.google.com
 1. Lucidworks Fusion 3.0 or higher.  Download at http://lucidworks.com.
  
  
@@ -20,7 +20,7 @@ Note, if you have a multi-node Fusion installation, you will need to copy the ja
 
 # Usage
 
-The Watson plugins currently consist of 2 query pipeline stages: Speech To text and Query Classification.  To use them, add the stages to an
+This plugin currently consist of 1 query pipeline stages: Speech To text.  To use it, add the stage to an
 existing Query Pipeline and fill in the appropriate parameters.  See below for more details.
 
 
@@ -44,13 +44,13 @@ See our documentation for more detail, especially:
 Assuming you have a collection named "watson" setup and the Speech To Text stage configured in the default pipeline, you can do the following:
 
 
-    curl -X POST -H "Content-Type: audio/wav" -u USER:PASS --data-binary @/PATH/TO/WAV/FILE "http://localhost:8764/api/apollo/query-pipelines/default/collections/watson/select"
+    curl -X POST -H "Content-Type: audio/wav" -u USER:PASS --data-binary @/PATH/TO/WAV/FILE "http://localhost:8764/api/apollo/query-pipelines/default/collections/google/select"
 
 ### Example Configuration
 Here's an example configuration, with user and password XXXXXX'd out.  Note that transcribing audio can take some time.
 
     {
-      "id" : "watson",
+      "id" : "Google",
       "stages" : [ {
         "type" : "speech-to-text",
         "id" : "zo3ld8kamakeqgds4i",
@@ -105,89 +105,9 @@ Here's an example configuration, with user and password XXXXXX'd out.  Note that
         "secretSourceStageId" : "38a85e5f-9955-489a-97cb-5426efbb2321"
       } ],
       "properties" : {
-        "secretSourcePipelineId" : "watson"
+        "secretSourcePipelineId" : "google"
       }
     }
 
 
-### Example API usage.
 
-Assuming you have a collection named "watson" setup and the NL Query Classifier stage configured in the default pipeline, you can do the following:
-
-
-    curl -X POST  -u USER:PASS  "http://localhost:8764/api/apollo/query-pipelines/default/collections/watson/select?q=is+it+hot+out&classifierId=XXXXXXXXXX" // Substitute in your classifierId or set the default on in the stage config.
-
-
-### Example Stage Configuration
-
-    {
-        "id": "default",
-        "stages": [
-          {
-            "type": "nl-query-classifier",
-            "id": "m624ajt47a6qg2e29",
-            "username": "6c4d626c-6475-443f-9835-93cf56ca3eba",
-            "password": "xXx-Redacted-xXx",
-            "resultsLocation": "Request",
-            "resultsKey": "watsonResults",
-            "inputLocation": "Request",
-            "inputKey": "q",
-            "topCategoryOnly": true,
-            "skip": false,
-            "label": "nl-query-classifier",
-            "secretSourceStageId": "m624ajt47a6qg2e29"
-          },
-          {
-            "type": "recommendation",
-            "id": "0df8d4f4-e857-4568-b6b1-cc6ab0b769be",
-            "numRecommendations": 10,
-            "numSignals": 100,
-            "aggrType": "*",
-            "boostId": "id",
-            "skip": false,
-            "label": "recommendation",
-            "secretSourceStageId": "0df8d4f4-e857-4568-b6b1-cc6ab0b769be"
-          },
-          {
-            "type": "search-fields",
-            "id": "0df37088-0e43-4405-914f-5a397990b066",
-            "rows": 10,
-            "start": 0,
-            "queryFields": [],
-            "returnFields": [
-              "*",
-              "score"
-            ],
-            "skip": false,
-            "label": "search-fields",
-            "secretSourceStageId": "0df37088-0e43-4405-914f-5a397990b066"
-          },
-          {
-            "type": "facet",
-            "id": "537e1d5d-8a01-472d-8e67-e6363480d062",
-            "fieldFacets": [],
-            "skip": false,
-            "label": "facet",
-            "secretSourceStageId": "537e1d5d-8a01-472d-8e67-e6363480d062"
-          },
-          {
-            "type": "solr-query",
-            "id": "6d94cf6b-0f64-4dce-be12-7d6115333d47",
-            "allowedRequestHandlers": [],
-            "httpMethod": "POST",
-            "allowFederatedSearch": false,
-            "skip": false,
-            "label": "solr-query",
-            "secretSourceStageId": "6d94cf6b-0f64-4dce-be12-7d6115333d47"
-          }
-        ],
-        "properties": {
-          "secretSourcePipelineId": "default"
-        }
-      }
-
-# Roadmap
-
-1. Add support for the Alchemy APIs.  This work has begun on a branch and is under development.
-1. Image categorization.
-1. Text to Speech
