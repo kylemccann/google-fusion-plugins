@@ -111,7 +111,7 @@ public class GoogleSpeechToTextStage extends QueryStage<GoogleSpeechToTextStageC
                 //** Google API Request **//
                 HttpResponse<String> jsonResponse = Unirest.post(endPointURL + "?key=" + apiKey)
                         .header("accept", "application/json;text/xml")
-                        .header("Content-Type", "audio/wav; codec=audio/pcm; samplerate=16000")
+                        .header("Content-Type", "audio/wav; codec=audio/pcm; samplerate="+ sampleRate)
                         .body(jsonString)
                         .asString();
 
