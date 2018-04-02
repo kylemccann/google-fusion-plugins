@@ -19,7 +19,7 @@ public class SpeechToTextStageConfigTest {
         String expected_Encoding = "LINEAR16";
         boolean expected_DebugMode = true;
 
-        SpeechToTextStageConfig config = new SpeechToTextStageConfig(expected_id, expected_apiKey, expected_ResultsLocation, expected_ResultsKey,
+        GoogleSpeechToTextStageConfig config = new GoogleSpeechToTextStageConfig(expected_id, expected_apiKey, expected_ResultsLocation, expected_ResultsKey,
                 url, expected_sampleRate , expected_Encoding, expected_DebugMode);
 
 

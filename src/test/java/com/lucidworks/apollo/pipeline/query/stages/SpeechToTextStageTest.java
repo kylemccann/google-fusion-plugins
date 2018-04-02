@@ -32,20 +32,20 @@ public class SpeechToTextStageTest {
     public final ExpectedException exception = ExpectedException.none();
 
     String url;
-    SpeechToTextStageConfig config;
-    SpeechToTextStage stage;
+    GoogleSpeechToTextStageConfig config;
+    GoogleSpeechToTextStage stage;
 
     @Before
     public void setup(){
         url = "";
-        config = new SpeechToTextStageConfig("testBasics", "AIzaSyBgA9dJN7iw1_9vnDPlWTntPrvSDg5idjU", SpeechToTextStageConfig.REQUEST, "testBasics",
+        config = new GoogleSpeechToTextStageConfig("testBasics", "AIzaSyBgA9dJN7iw1_9vnDPlWTntPrvSDg5idjU", GoogleSpeechToTextStageConfig.REQUEST, "testBasics",
                 url, "0", "LINEAR16", true);
-         stage = new SpeechToTextStage(TestHelper.newParams(config));
+         stage = new GoogleSpeechToTextStage(TestHelper.newParams(config));
     }
     @Test
     public void testCreateJsonObject() throws Exception {
-        SpeechToTextStageConfig config = new SpeechToTextStageConfig("", "", "", "", "", "", "", false); //We are not testing this so values dont matter.
-        SpeechToTextStage sts = new SpeechToTextStage(TestHelper.newParams(config));
+        GoogleSpeechToTextStageConfig config = new GoogleSpeechToTextStageConfig("", "", "", "", "", "", "", false); //We are not testing this so values dont matter.
+        GoogleSpeechToTextStage sts = new GoogleSpeechToTextStage(TestHelper.newParams(config));
         
         byte[] b = new byte[0]; // dummy file.
         String jsonString = sts.createJsonObject("LINEAR16", 16000, b);
